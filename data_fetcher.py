@@ -2,38 +2,56 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# Load variables from .env file
+# Load environment variables
 load_dotenv()
 
-# ---------------- API KEYS (SECURE) ----------------
+# ---------------- API KEYS ----------------
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 AQI_API_KEY = os.getenv("AQI_API_KEY")
 
-# ---------------- WEATHER FUNCTION ----------------
-def get_weather(city):
+
+# ---------------- GET COORDINATES ----------------
+def get_coordinates(place):
     try:
-        # Check if key exists
         if not WEATHER_API_KEY:
             print("Missing WEATHER_API_KEY")
             return None
 
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric"
+        url = f"http://api.openweathermap.org/geo/1.0/direct?q={place}&limit=1&appid={WEATHER_API_KEY}"
         response = requests.get(url, timeout=5)
         data = response.json()
 
-        # Check if city is valid
+        if not data:
+            return None
+
+        return data[0]["lat"], data[0]["lon"]
+
+    except Exception as e:
+        print("Geocoding Error:", e)
+        return None
+
+
+# ---------------- WEATHER USING COORDINATES ----------------
+def get_weather_by_coords(lat, lon):
+    try:
+        if not WEATHER_API_KEY:
+            print("Missing WEATHER_API_KEY")
+            return None
+
+        url = f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={WEATHER_API_KEY}&units=metric"
+        response = requests.get(url, timeout=5)
+        data = response.json()
+
         if data.get("cod") != 200:
             return None
 
-        weather_data = {
+        return {
             "temp": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
             "rain": data.get("rain", {}).get("1h", 0),
-            "lat": data["coord"]["lat"],
-            "lon": data["coord"]["lon"]
+            "lat": lat,
+            "lon": lon
         }
-
-        return weather_data
 
     except Exception as e:
         print("Weather API Error:", e)
@@ -43,7 +61,6 @@ def get_weather(city):
 # ---------------- AQI FUNCTION ----------------
 def get_aqi(lat, lon):
     try:
-        # Check if key exists
         if not AQI_API_KEY:
             print("Missing AQI_API_KEY")
             return None
@@ -63,13 +80,20 @@ def get_aqi(lat, lon):
 
 
 # ---------------- COMBINED FUNCTION ----------------
-def get_all_data(city):
-    weather = get_weather(city)
+def get_all_data(place):
+    coords = get_coordinates(place)
+
+    if not coords:
+        return None
+
+    lat, lon = coords
+
+    weather = get_weather_by_coords(lat, lon)
 
     if not weather:
         return None
 
-    aqi = get_aqi(weather["lat"], weather["lon"])
+    aqi = get_aqi(lat, lon)
 
     if aqi is None:
         return None
@@ -81,12 +105,12 @@ def get_all_data(city):
 
 # ---------------- TEST RUN ----------------
 if __name__ == "__main__":
-    city = input("Enter city name: ").strip()
+    place = input("Enter place: ").strip()
 
-    result = get_all_data(city)
+    result = get_all_data(place)
 
     if result:
         print("\n✅ Data fetched successfully:")
         print(result)
     else:
-        print("\n❌ Failed to fetch data. Check city name or API keys.")
+        print("\n❌ Failed to fetch data. Check location or API keys.")
