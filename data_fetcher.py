@@ -1,9 +1,13 @@
 import requests
 import os
+from dotenv import load_dotenv
+
+# Load variables from .env file
+load_dotenv()
 
 # ---------------- API KEYS (SECURE) ----------------
-WEATHER_API_KEY = os.getenv("4d8b2f155a313ca0c0da2725005ea7f7")
-AQI_API_KEY = os.getenv("f43ff0a9ea330b352bc54aa273f9fda6cee84cd9")
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+AQI_API_KEY = os.getenv("AQI_API_KEY")
 
 # ---------------- WEATHER FUNCTION ----------------
 def get_weather(city):
