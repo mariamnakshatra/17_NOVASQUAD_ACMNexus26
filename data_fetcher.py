@@ -1,13 +1,18 @@
 import requests
+import os
 
-# ---------------- API KEYS ----------------
-
-WEATHER_API_KEY = "8c1d1f75ee0374a3e1eaa4985e2930ed"
-AQI_API_KEY = "f43ff0a9ea330b352bc54aa273f9fda6cee84cd9"
+# ---------------- API KEYS (SECURE) ----------------
+WEATHER_API_KEY = os.getenv("4d8b2f155a313ca0c0da2725005ea7f7")
+AQI_API_KEY = os.getenv("f43ff0a9ea330b352bc54aa273f9fda6cee84cd9")
 
 # ---------------- WEATHER FUNCTION ----------------
 def get_weather(city):
     try:
+        # Check if key exists
+        if not WEATHER_API_KEY:
+            print("Missing WEATHER_API_KEY")
+            return None
+
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric"
         response = requests.get(url, timeout=5)
         data = response.json()
@@ -19,7 +24,7 @@ def get_weather(city):
         weather_data = {
             "temp": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
-            "rain": data.get("rain", {}).get("1h", 0),  # safe handling
+            "rain": data.get("rain", {}).get("1h", 0),
             "lat": data["coord"]["lat"],
             "lon": data["coord"]["lon"]
         }
@@ -34,6 +39,11 @@ def get_weather(city):
 # ---------------- AQI FUNCTION ----------------
 def get_aqi(lat, lon):
     try:
+        # Check if key exists
+        if not AQI_API_KEY:
+            print("Missing AQI_API_KEY")
+            return None
+
         url = f"https://api.waqi.info/feed/geo:{lat};{lon}/?token={AQI_API_KEY}"
         response = requests.get(url, timeout=5)
         data = response.json()
