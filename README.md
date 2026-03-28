@@ -1,223 +1,141 @@
-# 🚀 Welcome to NEXUS
+#  EnviroCheck
 
-### Conducted by | CLIQUE x ACM MITS |
-
-### 📅 March 27 & 28
-
-### 📍 Muthoot Institute of Technology and Science
-
-<p align="center">
-  <img src="template_acm.png" width="500"/>
-  <img src="template_clique.png" width="250"/>
-</p>
+EnviroCheck is an intelligent **climate risk monitoring and analysis system** that transforms real-time environmental data into meaningful insights and actionable recommendations.
 
 ---
 
-### 📖 Description
+##  Problem Statement
 
-A **16-hour hackathon** across various domains where innovation meets execution. Build, collaborate, and push your limits.
+Environmental data is often fragmented and difficult to interpret.
+Users lack a unified system that connects **weather data, pollution levels, and real-world risks** to support quick and informed decision-making.
 
 ---
 
-## 🧠 Project Details (To be filled by participants)
+##  Solution
 
-```md
-### 🏷️ Project Name:
-<Your Project Name>
+EnviroCheck provides a **unified platform** that:
 
-### 🎯 Chosen Domain:
-<One from the given domains>
+* Collects real-time environmental data from APIs
+* Analyzes risks using threshold-based and predictive models
+* Generates **actionable recommendations**
+* Visualizes insights through an interactive dashboard
 
-### ❗ Problem Statement:
-<What problem are you solving?>
+---
 
-### 💡 Solution:
-<How does your project solve the problem?>
+##  System Overview
+
+### Frontend
+
+* Built using Streamlit
+* Interactive dashboard with multiple tabs:
+
+  *  Dashboard (climate metrics + risk alerts)
+  *  Flood Risk Map (interactive visualization)
+  *  Indoor Climate (comfort + simulation)
+  *  Forecast (5-day prediction)
+
+###  Backend
+
+* Python-based modular architecture
+* Real-time data fetching using APIs
+* Risk evaluation engine
+* AI-based recommendation system (Action Plan)
+* NEXUS predictive intelligence module
+
+---
+
+##  Key Features
+
+###  Real-time Monitoring
+
+* Temperature, Humidity, Rainfall, AQI
+* Location-based AQI adjustment
+
+###  Risk Analysis
+
+* Heat Risk (temperature thresholds)
+* Flood Risk (rainfall-based modeling)
+* Air Quality Risk (AQI-based classification)
+
+###  Flood Risk Mapping
+
+* Interactive Leaflet.js map
+* Risk levels based on rainfall intensity
+
+###  Indoor Climate Simulation
+
+* Simulates indoor temperature based on:
+
+  * Outdoor conditions
+  * AC usage patterns
+* Comfort classification system
+
+###  NEXUS Intelligence Engine
+
+* Predictive insights including:
+
+  * Urban flood alerts (drainage overflow)
+  * Structural risks (dew point & condensation)
+  * Health risks (heat index, pressure changes)
+  * Environmental impacts (humidity, spoilage)
+
+###  Smart Action Plan
+
+* Generates user-specific safety recommendations
+* Based on real-time risk conditions
+
+---
+
+##  Technologies Used
+
+* Python 3.x
+* Streamlit
+* Requests
+* python-dotenv
+* Plotly (for forecast visualization)
+* Git & GitHub
+
+---
+
+##  Project Structure
+
+* `Envirocheck.py` — Main application
+* `action_plan.py` — Smart recommendation module
+* `risk_engine.py` — Risk evaluation logic
+* `data_fetcher.py` — API integration
+* `location_ai.py` — Location-based AQI adjustment
+* `nexus_full.py` — NEXUS predictive engine
+* `CHANGELOG.md` — Development history
+* `.env` — API configuration
+
+---
+
+##  Team
+
+**Team NOVASQUAD**
+
+* Julia Mary James
+* Nakshatra Mariam Manoj
+* Nandana Deepak
+* Pooja Nair
+
+---
+
+##  How to Run
+
+```bash
+pip install streamlit requests python-dotenv
+streamlit run Envirocheck.py
 ```
 
 ---
 
-## 🎯 Hackathon Domains
+##  Future Scope
 
-Participants must choose **one** of the following domains:
-
-1️⃣ Digital Asset Protection
-2️⃣ Smart Supply Chains
-3️⃣ Digital Health & Predictive Care
-4️⃣ Climate Intelligence
-5️⃣ Cybersecurity & Threat Intelligence
+* Real sensor integration (IoT)
+* Personalized alerts (elderly / children)
+* Advanced AI prediction models
+* Notification system
+* Enhanced geospatial analytics
 
 ---
-
-## ⚙️ Hackathon Workflow & Rules
-
-To ensure fairness and transparency, we have designed a structured development and tracking system.
-
----
-
-### 🔗 GitHub Template
-
-👉 **Template Repo:** `{link}`
-
-* All teams must **fork this repository**
-* Fork name must follow:
-
-```
-<TeamId>_<TeamName>_ACMNexus26
-```
-
-* Example:
-
-```
-12_CodeWarriors_ACMNexus26
-```
-
-* You may rename the repository **after the event ends**
-
----
-
-
----
-
-## 👥 Participation Rules
-
-* Team Size: **2–4 members**
-* **Pre-created projects are strictly not allowed**
-* All work must be done **during the hackathon timeframe**
-* Only registered team members must participate
-* Do **not attack or interfere** with college infrastructure/network
-* Follow all instructions from the organizing team
-
----
-
-## 📁 Repository Structure
-
-
-Repository must not be private. The template Repository includes:
-
-```
-AGENTS.md
-README.md
-CHANGELOG.md
-/progress/
-```
-
----
-
-## ⏱️ Hourly Progress Requirements
-
-Every hour, teams must:
-
-* Make **at least one commit**
-* Add **at least one progress update** inside `/progress/`
-
-Progress can include:
-
-* Screenshots
-* Screen recordings
-* Dataset snapshots
-* Any meaningful proof of work
-
-### 📂 Progress Format
-
-```
-/progress
-1.png
-2.png
-3.png
-```
-
-* Files must be **numbered sequentially**
-* Each file should reflect **actual development progress**
-
----
-
-## 📝 Changelog Rules (VERY IMPORTANT)
-
-Every commit must be reflected in `CHANGELOG.md`.
-
-You can:
-
-* Update it per commit, OR
-* Update it periodically (but must be complete at the end)
-
----
-
-### 📌 Changelog Format
-
-```md
-## HH:MM
-
-### Features Added
-- Added login functionality
-- Implemented API integration
-
-### Files Modified
-- auth.js
-- login.jsx
-
-### Issues Faced
-- Firebase auth errors
-- API timeout issues
-```
-
----
-
-💡 Tip:
-Instructions are already included in `AGENTS.md`.
-You can simply prompt it to **"CREATE CHANGELOG"** to follow the format.
-
----
-
-## 📖 Documentation
-
-We have provided:
-
-* Examples
-* Guidelines
-
-Inside:
-
-* `AGENTS.md`
-* `README.md`
-
-Please follow them strictly.
-
----
-
-## 🔍 Monitoring & Verification
-
-* Random checks will be conducted during the hackathon
-* Organizers may:
-
-  * Inspect commit history
-  * Review changelog consistency
-  * Verify progress evidence
-
----
-
-## 👨‍💻 Team Collaboration Rules
-
-* All members must be added as **collaborators**
-* By the end of the hackathon:
-
-  * **Each member must have at least one commit**
-
----
-
-## ⚠️ Disqualification Criteria
-
-* Use of **pre-built / pre-developed projects**
-* Fake or manipulated commit history
-* Missing hourly commits or progress updates
-* Incomplete or inconsistent changelog
-
----
-
-## 🏁 Final Note
-
-Focus on building, learning, and enjoying the experience.
-
----
-
-🔥 **Build. Break. Innovate. See you at NEXUS.**
